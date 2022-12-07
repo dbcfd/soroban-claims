@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "patient-visit",
+    "claim-file",
+    "claim-rejection",
+    "claim-appeal",
+    "claim-acceptance",
+    "claim-payment",
+]
