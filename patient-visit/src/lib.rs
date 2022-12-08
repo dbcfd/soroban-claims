@@ -1,14 +1,29 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+#![no_std]
+use soroban_sdk::{contractimpl, contracttype, symbol, vec, Env, Identifier, Symbol, Vec};
+
+pub struct Contract;
+
+#[contractimpl]
+impl Contract {
+    pub fn hello(env: Env, to: Symbol) -> Vec<Symbol> {
+        vec![&env, symbol!("Hello"), to]
+
 
 #[cfg(test)]
-mod tests {
-    use super::*;
+mod test {
+    use super::{Contract, ContractClient};
+    use soroban_sdk::{symbol, vec, Env};
 
     #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    fn test() {
+        let env = Env::default();
+        let contract_id = env.register_contract(None, Contract);
+        let client = ContractClient::new(&env, &contract_id);
+
+        let words = client.hello(&symbol!("Dev"));
+        assert_eq!(
+            words,
+            vec![&env, symbol!("Hello"), symbol!("Dev"),]
+        );
     }
 }

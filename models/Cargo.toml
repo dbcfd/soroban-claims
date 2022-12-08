@@ -1,0 +1,8 @@
+[package]
+name = "models"
+version = "0.1.0"
+edition = "2021"
+authors = ["Danny Browning <bdbrowning2@gmail.com>"]
+
+[dependencies]
+soroban-sdk = "0.3.1"
